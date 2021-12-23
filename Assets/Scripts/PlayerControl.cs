@@ -23,26 +23,8 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        Vector3 pos = transform.position;
-   
-        if (Input.GetKey(upButton))
-        {
-            pos.y += speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(downButton))
-        {
-            pos.y -= speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(leftButton))
-        {
-            pos.x -= speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(rightButton))
-        {
-            pos.x += speed * Time.deltaTime;
-        }
-
-        transform.position = pos;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = Vector2.MoveTowards(transform.position, mousePosition, speed * Time.deltaTime);
     }
     
     // Menaikkan skor sebanyak 1 poin
