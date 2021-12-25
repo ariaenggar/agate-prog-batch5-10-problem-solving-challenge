@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,15 +11,11 @@ public class PlayerControl : MonoBehaviour
     public KeyCode rightButton = KeyCode.D;
  
     public float speed = 5.0f;
- 
- 
-    private Rigidbody2D rigidBody2D;
- 
     private int score;
-    
+    public Text scoreText;
+
     void Start()
     {
-        rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -32,15 +29,15 @@ public class PlayerControl : MonoBehaviour
         {
             pos.y += speed * Time.deltaTime;
         }
-        else if (Input.GetKey(downButton))
+        if (Input.GetKey(downButton))
         {
             pos.y -= speed * Time.deltaTime;
         }
-        else if (Input.GetKey(leftButton))
+        if (Input.GetKey(leftButton))
         {
             pos.x -= speed * Time.deltaTime;
         }
-        else if (Input.GetKey(rightButton))
+        if (Input.GetKey(rightButton))
         {
             pos.x += speed * Time.deltaTime;
         }
@@ -52,24 +49,18 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
+        Debug.Log(score);
     }
-    
-    // Mengembalikan skor menjadi 0
-    public void ResetScore()
+
+    void OnTriggerEnter2D(Collider2D anotherCollider)
     {
-        score = 0;
-    }
- 
-    // Mendapatkan nilai skor
-    public int Score
-    {
-        get { return score; }
-    }
-    
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.name.Equals("Ball"))
+        if (anotherCollider.CompareTag("Square"))
         {
+            IncrementScore();
+            if (scoreText != null)
+            {
+                scoreText.text = "Score: " + score;
+            }
         }
     }
 }

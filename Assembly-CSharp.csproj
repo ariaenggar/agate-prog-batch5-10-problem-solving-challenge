@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallControl.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\SquareControl.cs" />
     <Compile Include="Assets\Scripts\SquareManager.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/gameprojects/unity/Problem Solving Challenge/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
