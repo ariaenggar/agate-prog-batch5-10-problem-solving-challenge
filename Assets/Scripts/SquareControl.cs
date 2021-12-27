@@ -1,27 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class SquareControl : MonoBehaviour
 {
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public UnityAction<SquareControl> OnDestroyed = delegate {    };
     
     void OnTriggerEnter2D(Collider2D anotherCollider)
     {
         if (anotherCollider.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            OnDestroyed(this);
+            gameObject.SetActive(false);
         }
     }
 }
