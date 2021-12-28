@@ -7,7 +7,7 @@ public class SquareManager : MonoBehaviour
     [SerializeField] private GameObject square;
     [SerializeField] private int minSquareCount = 10;
     [SerializeField] private int maxSareCount = 30;
-
+    [SerializeField] private Collider2D playerCollider;
     private void Start()
     {
         float squareSpawnNum = Random.Range(minSquareCount, maxSareCount);
@@ -36,10 +36,19 @@ public class SquareManager : MonoBehaviour
 
     private void SetPosition(GameObject squareGameObject)
     {
-        float randomY = Random.Range(-3.5f, 3.5f);
-        float randomX = Random.Range(-7.8f, 7.8f);
+        Vector2 position = GetRandomPosition();
             
-        squareGameObject.transform.position = new Vector2(randomX, randomY);
+        while (playerCollider.bounds.Contains(position))
+        {
+            position = GetRandomPosition();
+        }
+
+        squareGameObject.transform.position = position;
+    }
+
+    private Vector2 GetRandomPosition()
+    {
+        return new Vector2(Random.Range(-7.8f, 7.8f), Random.Range(-3.5f, 3.5f));
     }
 
 }

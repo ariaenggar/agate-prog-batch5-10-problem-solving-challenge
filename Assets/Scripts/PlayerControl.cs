@@ -49,7 +49,6 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
-        Debug.Log(score);
     }
 
     void OnTriggerEnter2D(Collider2D anotherCollider)
