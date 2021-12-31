@@ -16,13 +16,15 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
+        int key = Random.Range(97, 122);
+        Debug.Log("Up is :" + KeyCode.W);
+        upButton = (KeyCode)key;
+        Debug.Log("Up is :" + (KeyCode)key);
+        Debug.Log("me" + this.gameObject.name);
     }
 
     void Update()
     {
-        /*Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = Vector2.MoveTowards(transform.position, mousePosition, speed * Time.deltaTime);*/
-        
         Vector3 pos = transform.position;
    
         if (Input.GetKey(upButton))

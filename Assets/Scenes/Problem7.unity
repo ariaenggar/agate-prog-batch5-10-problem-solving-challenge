@@ -1080,6 +1080,7 @@ MonoBehaviour:
   square: {fileID: 4950809381170350111, guid: a5736de92c8ff7e4db42b7bc1e0acabc, type: 3}
   minSquareCount: 10
   maxSareCount: 30
+  playerCollider: {fileID: 0}
 --- !u!4 &1924615607
 Transform:
   m_ObjectHideFlags: 0

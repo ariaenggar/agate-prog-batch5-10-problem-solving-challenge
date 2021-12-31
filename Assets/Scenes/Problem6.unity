@@ -697,6 +697,7 @@ MonoBehaviour:
   leftButton: 97
   rightButton: 100
   speed: 10
+  scoreText: {fileID: 0}
 --- !u!1 &1790531240
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +834,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   square: {fileID: 4950809381170350111, guid: a5736de92c8ff7e4db42b7bc1e0acabc, type: 3}
-  maxSquareCount: 5
+  minSquareCount: 10
+  maxSareCount: 30
+  playerCollider: {fileID: 0}
 --- !u!4 &1924615607
 Transform:
   m_ObjectHideFlags: 0
