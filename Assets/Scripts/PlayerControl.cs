@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -9,6 +12,13 @@ public class PlayerControl : MonoBehaviour
     public KeyCode downButton = KeyCode.S;
     public KeyCode leftButton = KeyCode.A;
     public KeyCode rightButton = KeyCode.D;
+    
+    [SerializeField] private Text upText;
+    [SerializeField] private Text downText;
+    [SerializeField] private Text lefText;
+    [SerializeField] private Text rightText;
+
+    private KeyCode[] keyCodes = {0,0,0,0}; 
  
     public float speed = 5.0f;
     private int score;
@@ -16,16 +26,33 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        int key = Random.Range(97, 122);
-        Debug.Log("Up is :" + KeyCode.W);
-        upButton = (KeyCode)key;
-        Debug.Log("Up is :" + (KeyCode)key);
-        Debug.Log("me" + this.gameObject.name);
+        upButton = (KeyCode)Random.Range(97, 122);
+        keyCodes[0] = upButton;
+        
+        do {
+            downButton = (KeyCode)Random.Range(97, 122);
+        } while (keyCodes.Contains(downButton));
+        keyCodes[1] = downButton;
+ 
+        do {
+            leftButton = (KeyCode)Random.Range(97, 122);
+        } while (keyCodes.Contains(leftButton));
+        keyCodes[2] = leftButton;
+ 
+        do {
+            rightButton = (KeyCode)Random.Range(97, 122);
+        } while (keyCodes.Contains(rightButton));
+        keyCodes[3] = rightButton;
+        
+        upText.text = "Up: " + upButton;
+        downText.text = "Down: " + downButton;
+        lefText.text = "Left\n" + leftButton;
+        rightText.text = "Right\n" + rightButton;
     }
 
     void Update()
     {
-        Vector3 pos = transform.position;
+        Vector2 pos = transform.position;
    
         if (Input.GetKey(upButton))
         {
