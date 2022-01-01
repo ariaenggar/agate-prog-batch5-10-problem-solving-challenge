@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BallControl : MonoBehaviour
+public class BounceControl : MonoBehaviour
 {
     // Rigidbody 2D bola
     private Rigidbody2D rigidBody2D;

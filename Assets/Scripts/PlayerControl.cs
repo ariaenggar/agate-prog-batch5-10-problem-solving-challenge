@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Text lefText;
     [SerializeField] private Text rightText;
 
-    private KeyCode[] keyCodes = {0,0,0,0}; 
+    private KeyCode[] keyCodes = {KeyCode.W,KeyCode.S,KeyCode.A,KeyCode.D}; 
  
     public float speed = 5.0f;
     private int score;
@@ -26,24 +26,53 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        upButton = (KeyCode)Random.Range(97, 122);
-        keyCodes[0] = upButton;
-        
-        do {
-            downButton = (KeyCode)Random.Range(97, 122);
-        } while (keyCodes.Contains(downButton));
-        keyCodes[1] = downButton;
- 
-        do {
-            leftButton = (KeyCode)Random.Range(97, 122);
-        } while (keyCodes.Contains(leftButton));
-        keyCodes[2] = leftButton;
- 
-        do {
-            rightButton = (KeyCode)Random.Range(97, 122);
-        } while (keyCodes.Contains(rightButton));
-        keyCodes[3] = rightButton;
-        
+        InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
+        InvokeRepeating("IncrementScore", 1.0f, 1.0f);
+    }
+
+    void ChangeInputBind()
+    {
+        int index = Random.Range(0, 3);
+
+        if (index == 1)
+        {
+            do
+            {
+                upButton = (KeyCode)Random.Range(97, 122);
+            } while (keyCodes.Contains(upButton));
+            keyCodes[0] = upButton;
+        }
+
+        if (index == 2)
+        {
+            do
+            {
+                downButton = (KeyCode)Random.Range(97, 122);
+            } while (keyCodes.Contains(downButton));
+
+            keyCodes[1] = downButton;
+        }
+
+        if (index == 3)
+        {
+            do
+            {
+                leftButton = (KeyCode)Random.Range(97, 122);
+            } while (keyCodes.Contains(leftButton));
+
+            keyCodes[2] = leftButton;
+        }
+
+        if (index == 4)
+        {
+            do
+            {
+                rightButton = (KeyCode)Random.Range(97, 122);
+            } while (keyCodes.Contains(rightButton));
+
+            keyCodes[3] = rightButton;
+        }
+
         upText.text = "Up: " + upButton;
         downText.text = "Down: " + downButton;
         lefText.text = "Left\n" + leftButton;
@@ -71,6 +100,9 @@ public class PlayerControl : MonoBehaviour
             pos.x += speed * Time.deltaTime;
         }
 
+        pos.y = Mathf.Clamp(pos.y, -3.81f, 3.67f);
+        pos.x = Mathf.Clamp(pos.x, -7.9f, 7.9f);
+        
         transform.position = pos;
     }
     
@@ -78,17 +110,26 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
+    }
+    
+    public void DecrementScore()
+    {
+        score = score - 10;
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D anotherCollider)
     {
         if (anotherCollider.CompareTag("Square"))
         {
-            IncrementScore();
-            if (scoreText != null)
-            {
-                scoreText.text = "Score: " + score;
-            }
+            DecrementScore();
         }
     }
 }
