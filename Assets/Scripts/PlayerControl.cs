@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -118,16 +114,16 @@ public class PlayerControl : MonoBehaviour
     
     public void DecrementScore()
     {
-        score = score - 10;
+        score -= 5;
         if (scoreText != null)
         {
             scoreText.text = "Score: " + score;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D anotherCollider)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (anotherCollider.CompareTag("Square"))
+        if (collision.gameObject.CompareTag("Square"))
         {
             DecrementScore();
         }

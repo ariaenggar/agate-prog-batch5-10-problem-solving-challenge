@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class BounceControl : MonoBehaviour
@@ -21,19 +22,16 @@ public class BounceControl : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         
         // Mulai game
-        RestartGame();
+        PushBall();
     }
 
-    void ResetBall()
+    private void OnEnable()
     {
-        // Reset posisi menjadi (0,0)
-        transform.position = Vector2.zero;
- 
-        // Reset kecepatan menjadi (0,0)
-        rigidBody2D.velocity = Vector2.zero;
+        if(rigidBody2D != null)
+            PushBall();
     }
-    
-    void PushBall()
+
+    public void PushBall()
     {
         // Tentukan nilai komponen y dari gaya dorong antara -yInitialForce dan yInitialForce
         float yRandomInitialForce = Random.Range(-yInitialForce, yInitialForce);
@@ -57,11 +55,5 @@ public class BounceControl : MonoBehaviour
             rigidBody2D.AddForce(new Vector2(xForce, yRandomInitialForce));
         }
 
-    }
-    
-    void RestartGame()
-    {
-        // Setelah 1 detik, berikan gaya ke bola
-        Invoke("PushBall", 1);
     }
 }
