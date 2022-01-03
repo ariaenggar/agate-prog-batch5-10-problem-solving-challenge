@@ -13,13 +13,20 @@ public class SquareManager : MonoBehaviour
         float squareSpawnNum = Random.Range(minSquareCount, maxSareCount);
         for(int i = 0; i < squareSpawnNum; i++)
         {
-            GameObject newSquare = Instantiate(square, square.transform.position, Quaternion.identity);
-            
-            SquareControl squareController = newSquare.GetComponent<SquareControl>();
-            squareController.OnDestroyed += RespawnSquare;
-
-            SetPosition(newSquare);
+            InstantiateNewSquare();
         }
+        
+        InvokeRepeating("InstantiateNewSquare", 2.0f, 2.0f);
+    }
+
+    private void InstantiateNewSquare()
+    {
+        GameObject newSquare = Instantiate(square, square.transform.position, Quaternion.identity);
+            
+        SquareControl squareController = newSquare.GetComponent<SquareControl>();
+        squareController.OnDestroyed += RespawnSquare;
+
+        SetPosition(newSquare);
     }
     
     public void RespawnSquare(SquareControl square)

@@ -18,9 +18,9 @@ public class PlayerControl : MonoBehaviour
     private KeyCode[] keyCodes = {KeyCode.W,KeyCode.S,KeyCode.A,KeyCode.D}; 
  
     public float speed = 5.0f;
-    private int score;
+    public int score;
     public Text scoreText;
-    public int indexChange;
+    private int indexChange;
 
     void Start()
     {
@@ -67,7 +67,6 @@ public class PlayerControl : MonoBehaviour
     void IncomingChangeInputBind()
     {
         indexChange = Random.Range(0, 3);
-        Debug.Log("random change " + indexChange);
         StartCoroutine("ChangeWarning");
     }
     
@@ -125,6 +124,14 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        if (score > 0)
+        {
+            Movement();
+        }
+    }
+
+    private void Movement()
+    {
         Vector2 pos = transform.position;
    
         if (Input.GetKey(upButton))
@@ -153,19 +160,25 @@ public class PlayerControl : MonoBehaviour
     // Menaikkan skor sebanyak 1 poin
     public void IncrementScore()
     {
-        score++;
-        if (scoreText != null)
+        if (score > 0)
         {
-            scoreText.text = "Score: " + score;
+            score++;
+            if (scoreText != null)
+            {
+                scoreText.text = "Score: " + score;
+            }    
         }
     }
     
     public void DecrementScore()
     {
-        score -= 5;
-        if (scoreText != null)
+        if (score > 0)
         {
-            scoreText.text = "Score: " + score;
+            score -= 1;
+            if (scoreText != null)
+            {
+                scoreText.text = "Score: " + score;
+            }
         }
     }
 
