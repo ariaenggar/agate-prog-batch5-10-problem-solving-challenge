@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BounceControl.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\InitScenceControl.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\SquareControl.cs" />
     <Compile Include="Assets\Scripts\SquareManager.cs" />

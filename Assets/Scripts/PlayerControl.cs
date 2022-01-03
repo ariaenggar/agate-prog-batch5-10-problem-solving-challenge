@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
@@ -22,9 +23,14 @@ public class PlayerControl : MonoBehaviour
     public Text scoreText;
     private int indexChange;
 
+    private AudioSource audioSource;
+
+    [SerializeField] private AudioClip countdownClip;
+
     void Start()
     {
-        InvokeRepeating("IncrementScore", 1.0f, 1.0f);
+        audioSource = GetComponent<AudioSource>();
+        InvokeRepeating("IncrementScore", 2.0f, 2.0f);
         InvokeRepeating("IncomingChangeInputBind", 7.0f, 10.0f);
         InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
     }
@@ -68,6 +74,8 @@ public class PlayerControl : MonoBehaviour
     {
         indexChange = Random.Range(0, 3);
         StartCoroutine("ChangeWarning");
+        audioSource.clip = countdownClip;
+        audioSource.PlayDelayed(0.5f);
     }
     
     void ChangeInputBind()
