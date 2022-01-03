@@ -44,6 +44,25 @@ public class PlayerControl : MonoBehaviour
             yield return new WaitForSeconds(.5f);
         }
     }
+    
+    IEnumerator ShowChangedImage()
+    {
+        Text textObject = null;
+        if(indexChange == 0) textObject = upText;
+        if(indexChange == 1) textObject = downText;
+        if(indexChange == 2) textObject = lefText;
+        if(indexChange == 3) textObject = rightText;
+        
+        GameObject gameObject = textObject.gameObject.transform.GetChild(0).gameObject;
+        
+        gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(3f);
+
+        gameObject.SetActive(false);
+        
+        StopCoroutine("ShowChangedImage");
+    }
 
     void IncomingChangeInputBind()
     {
@@ -101,6 +120,7 @@ public class PlayerControl : MonoBehaviour
         rightText.text = "Right\n" + rightButton;
 
         StopCoroutine("ChangeWarning");
+        StartCoroutine("ShowChangedImage");
     }
 
     void Update()
