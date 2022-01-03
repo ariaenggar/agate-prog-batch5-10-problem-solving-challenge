@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,18 +20,43 @@ public class PlayerControl : MonoBehaviour
     public float speed = 5.0f;
     private int score;
     public Text scoreText;
+    public int indexChange;
 
     void Start()
     {
-        InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
         InvokeRepeating("IncrementScore", 1.0f, 1.0f);
+        InvokeRepeating("IncomingChangeInputBind", 7.0f, 10.0f);
+        InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
+    }
+    
+    private IEnumerator ChangeWarning()
+    {
+        while (indexChange >= 0)
+        {
+            Text textObject = null;
+            if(indexChange == 0) textObject = upText;
+            if(indexChange == 1) textObject = downText;
+            if(indexChange == 2) textObject = lefText;
+            if(indexChange == 3) textObject = rightText;
+
+            textObject.enabled = !textObject.enabled;
+
+            yield return new WaitForSeconds(.5f);
+        }
     }
 
+    void IncomingChangeInputBind()
+    {
+        indexChange = Random.Range(0, 3);
+        Debug.Log("random change " + indexChange);
+        StartCoroutine("ChangeWarning");
+    }
+    
     void ChangeInputBind()
     {
-        int index = Random.Range(0, 3);
+        int index = indexChange;
 
-        if (index == 1)
+        if (index == 0)
         {
             do
             {
@@ -39,7 +65,7 @@ public class PlayerControl : MonoBehaviour
             keyCodes[0] = upButton;
         }
 
-        if (index == 2)
+        if (index == 1)
         {
             do
             {
@@ -49,7 +75,7 @@ public class PlayerControl : MonoBehaviour
             keyCodes[1] = downButton;
         }
 
-        if (index == 3)
+        if (index == 2)
         {
             do
             {
@@ -59,7 +85,7 @@ public class PlayerControl : MonoBehaviour
             keyCodes[2] = leftButton;
         }
 
-        if (index == 4)
+        if (index == 3)
         {
             do
             {
@@ -73,6 +99,8 @@ public class PlayerControl : MonoBehaviour
         downText.text = "Down: " + downButton;
         lefText.text = "Left\n" + leftButton;
         rightText.text = "Right\n" + rightButton;
+
+        StopCoroutine("ChangeWarning");
     }
 
     void Update()
