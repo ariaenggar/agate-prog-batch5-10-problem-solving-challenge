@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         audioSources = GetComponents<AudioSource>();
-        InvokeRepeating("IncrementScore", 2.0f, 2.0f);
+        InvokeRepeating("IncrementScore", 1.0f, 1.0f);
         InvokeRepeating("IncomingChangeInputBind", 7.0f, 10.0f);
         InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
     }
