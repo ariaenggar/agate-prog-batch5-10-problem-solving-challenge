@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class InitScenceControl : MonoBehaviour
 {
+    public GameObject attentionPanel;
     public Text attentionText;
     public Text instruction1Text;
     public Text instruction2Text;
+    private AudioSource audioSource; 
+    public AudioClip bingClip; 
     void Start()
     {
         attentionText.gameObject.SetActive(true);
-        AudioSource audioSource = attentionText.gameObject.GetComponent<AudioSource>();
+        audioSource = attentionPanel.gameObject.GetComponent<AudioSource>();
         audioSource.Play();
         
         StartCoroutine("LoadScene");
@@ -25,8 +28,10 @@ public class InitScenceControl : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
         
             instruction1Text.gameObject.SetActive(true);
+            audioSource.clip = bingClip;
+            audioSource.Play();
         
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(0.85f);
 
             instruction2Text.gameObject.SetActive(true);
 

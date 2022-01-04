@@ -23,13 +23,11 @@ public class PlayerControl : MonoBehaviour
     public Text scoreText;
     private int indexChange;
 
-    private AudioSource audioSource;
-
-    [SerializeField] private AudioClip countdownClip;
+    private AudioSource[] audioSources;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
         InvokeRepeating("IncrementScore", 2.0f, 2.0f);
         InvokeRepeating("IncomingChangeInputBind", 7.0f, 10.0f);
         InvokeRepeating("ChangeInputBind", 10.0f, 10.0f);
@@ -74,8 +72,7 @@ public class PlayerControl : MonoBehaviour
     {
         indexChange = Random.Range(0, 3);
         StartCoroutine("ChangeWarning");
-        audioSource.clip = countdownClip;
-        audioSource.PlayDelayed(0.5f);
+        audioSources[0].PlayDelayed(0.5f);
     }
     
     void ChangeInputBind()
@@ -183,6 +180,7 @@ public class PlayerControl : MonoBehaviour
         if (score > 0)
         {
             score -= 1;
+            audioSources[1].Play();
             if (scoreText != null)
             {
                 scoreText.text = "Score: " + score;
