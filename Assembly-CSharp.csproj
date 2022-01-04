@@ -57,10 +57,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BackButtonControl.cs" />
+    <Compile Include="Assets\Scripts\BackControl.cs" />
     <Compile Include="Assets\Scripts\BounceControl.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InitScenceControl.cs" />
+    <Compile Include="Assets\Scripts\MasterMenuControl.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Problem2\BallControl.cs" />
+    <Compile Include="Assets\Scripts\Problem3\BallControl.cs" />
+    <Compile Include="Assets\Scripts\Problem4\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Problem5\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Problem6\SquareManager.cs" />
+    <Compile Include="Assets\Scripts\Problem7\BallControl.cs" />
+    <Compile Include="Assets\Scripts\Problem7\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Problem7\SquareControl.cs" />
+    <Compile Include="Assets\Scripts\Problem7\SquareManager.cs" />
+    <Compile Include="Assets\Scripts\Problem8\BallControl.cs" />
+    <Compile Include="Assets\Scripts\Problem8\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\Problem8\SquareControl.cs" />
+    <Compile Include="Assets\Scripts\Problem8\SquareManager.cs" />
     <Compile Include="Assets\Scripts\SquareControl.cs" />
     <Compile Include="Assets\Scripts\SquareManager.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
