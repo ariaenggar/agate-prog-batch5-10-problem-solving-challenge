@@ -156,8 +156,8 @@ public class PlayerControl : MonoBehaviour
             pos.x += speed * Time.deltaTime;
         }
 
-        pos.y = Mathf.Clamp(pos.y, -3.81f, 3.67f);
-        pos.x = Mathf.Clamp(pos.x, -7.9f, 7.9f);
+        pos.y = Mathf.Clamp(pos.y, -3.62f, 3.67f);
+        pos.x = Mathf.Clamp(pos.x, -7.63f, 7.72f);
         
         transform.position = pos;
     }
